@@ -225,7 +225,20 @@ void q_sort(struct list_head *head)
     if (!head || list_empty(head) || list_is_singular(head))
         return;
     int size = q_size(head);
-    struct list_head *stack[size], *tmp = head->next;
+    struct list_head **stack =
+        (struct list_head **) malloc(size * sizeof(struct list_head *));
+
+    if (stack == NULL) {
+        return false;
+    }
+
+    for (int i = 0; i < size; i++) {
+        stack[i] = (struct list_head *) malloc(sizeof(struct list_head));
+        if (stack[i] == NULL) {
+            return false;
+        }
+    }
+    struct list_head *tmp = head->next;
     for (int i = 0; tmp != head; tmp = head->next) {
         list_del_init(tmp);
         stack[i++] = tmp;
