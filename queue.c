@@ -229,13 +229,13 @@ void q_sort(struct list_head *head)
         (struct list_head **) malloc(size * sizeof(struct list_head *));
 
     if (stack == NULL) {
-        return false;
+        return;
     }
 
     for (int i = 0; i < size; i++) {
         stack[i] = (struct list_head *) malloc(sizeof(struct list_head));
         if (stack[i] == NULL) {
-            return false;
+            return;
         }
     }
     struct list_head *tmp = head->next;
